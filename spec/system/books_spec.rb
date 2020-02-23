@@ -41,7 +41,7 @@ describe '投稿のテスト' do
 
   describe '編集のテスト' do
   	context '自分の投稿の編集画面への遷移' do
-  	  it '遷移できる' do
+			it '遷移できる' do
 	  		visit edit_book_path(book)
 	  		expect(current_path).to eq('/books/' + book.id.to_s + '/edit')
 	  	end
