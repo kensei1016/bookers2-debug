@@ -151,5 +151,20 @@ describe '投稿のテスト' do
   			expect(page).to have_no_link 'Destroy', href: book_path(book2)
   		end
   	end
-  end
+	end
+	
+	describe 'いいねのテスト' do
+		context '詳細画面の確認' do
+			it 'いいねを付けられること' do
+				visit book_path(book)
+				find('.favolite-link').click
+				# いいねのカウントが１になることを確認する
+				expect(find('.favolite-link').text).to eq '1'
+
+				# 一覧画面でいいねのカウントが１になっていること
+				visit books_path
+				expect(page).to have_selector "a[href=\"/books/#{book.id}/favorite\"]", text: '1'
+			end
+		end
+	end
 end

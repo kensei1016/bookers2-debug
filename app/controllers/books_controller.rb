@@ -2,7 +2,9 @@ class BooksController < ApplicationController
 	before_action :baria_user, only: [:edit, :update, :destroy]
 
   def show
-  	@book = Book.find(params[:id])
+		@book = Book.find(params[:id])
+		@book_comment = BookComment.new
+		@book_comments = BookComment.where(book_id: @book.id)
   end
 
   def index

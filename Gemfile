@@ -78,3 +78,10 @@ gem 'jquery-rails'
 
 # デバック
 gem 'pry-byebug'
+
+# railsコンソールのテーブル表示を見やすくする
+gem 'hirb'
+gem 'hirb-unicode'
+
+# アイコン
+gem 'font-awesome-sass', '~> 5.4.1'
