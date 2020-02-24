@@ -22,20 +22,18 @@ class UsersController < ApplicationController
   	if @user.update(user_params)
   		redirect_to user_path(@user), notice: "successfully updated user!"
 		else
-			# @books = @user.books
-  		# @book = Book.new
   		render "edit"
   	end
 	end
 	
 	def follows
-		@user = User.find(params[:id])
-		@follow_users = @user.relationship_users.map{|relationship_user| relationship_user.follow_user}
+		user = User.find(params[:id])
+		@follow_users = user.following_user
 	end
 
 	def followers
-		@user = User.find(params[:id])
-		@follower_users = @user.relationship_follow_users.map{|relationship_follow_user| relationship_follow_user.user}
+		user = User.find(params[:id])
+		@follower_users = user.follower_user
 	end
 
   private
