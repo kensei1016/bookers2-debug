@@ -26,7 +26,12 @@ class UsersController < ApplicationController
   		# @book = Book.new
   		render "edit"
   	end
-  end
+	end
+	
+	def follows
+		@user = User.find(params[:id])
+		@follow_users = @user.relationship_users.map{|relationship_user| relationship_user.follow_user}
+	end
 
   private
   def user_params
