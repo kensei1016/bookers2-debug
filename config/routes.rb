@@ -3,7 +3,13 @@ Rails.application.routes.draw do
   get 'home/about'
 
   devise_for :users
-  resources :users, only: [:show,:index,:edit,:update]
+  resources :users, only: [:show,:index,:edit,:update] do
+    resource :relationship, only: [:create, :destroy]
+    member do
+      get 'follows'
+      get 'followers'
+    end
+  end
   resources :books do
     resource :favorite, only: [:create, :destroy]
     resources :book_comments, only: [:create, :destroy]

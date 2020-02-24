@@ -7,6 +7,13 @@ class User < ApplicationRecord
   has_many :books, dependent: :destroy
   has_many :favorites, dependent: :destroy
   has_many :book_comments, dependent: :destroy
+  has_many :relationship_users,         class_name: "Relationship",
+                                        foreign_key: :user_id,
+                                        dependent: :destroy
+  has_many :relationship_follow_users,  class_name: "Relationship",
+                                        foreign_key: :follow_user_id,
+                                        dependent: :destroy
+                                        
   attachment :profile_image, destroy: false
 
   #バリデーションは該当するモデルに設定する。エラーにする条件を設定できる。
