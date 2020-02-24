@@ -33,6 +33,11 @@ class UsersController < ApplicationController
 		@follow_users = @user.relationship_users.map{|relationship_user| relationship_user.follow_user}
 	end
 
+	def followers
+		@user = User.find(params[:id])
+		@follower_users = @user.relationship_follow_users.map{|relationship_follow_user| relationship_follow_user.user}
+	end
+
   private
   def user_params
   	params.require(:user).permit(:name, :introduction, :profile_image)
