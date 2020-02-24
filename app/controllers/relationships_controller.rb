@@ -1,18 +1,11 @@
 class RelationshipsController < ApplicationController
   def create
-    follow_user = User.find(params[:user_id])
-    relationship = Relationship.new(user_id: current_user.id, follow_user_id: follow_user.id)
-    if relationship.save
-      # redirect_to user_path(follow_user)
-      redirect_back fallback_location: root_path
-    end
+    current_user.follow(params[:user_id])
+    redirect_to request.referer
   end
 
   def destroy
-    follow_user = User.find(params[:user_id])
-    relationship = Relationship.find_by(user_id: current_user.id, follow_user_id: follow_user.id)
-    relationship.destroy
-    # redirect_to user_path(follow_user)
-    redirect_back fallback_location: root_path
+    current_user.unfollow(params[:user_id])
+    redirect_to request.referer
   end
 end

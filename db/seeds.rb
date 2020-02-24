@@ -61,27 +61,27 @@ end
 
 # Relationship
 Relationship.create(
-  user_id: 1,
-  follow_user_id: 2
+  follower_id: 1,
+  followed_id: 2
 )
 
 Relationship.create(
-  user_id: 3,
-  follow_user_id: 2
+  follower_id: 3,
+  followed_id: 2
 )
 
 Relationship.create(
-  user_id: 4,
-  follow_user_id: 2
+  follower_id: 4,
+  followed_id: 2
 )
 
 Relationship.create(
-  user_id: 2,
-  follow_user_id: 1
+  follower_id: 2,
+  followed_id: 1
 )
 
 Relationship.create(
-  user_id: 5,
-  follow_user_id: 1
+  follower_id: 5,
+  followed_id: 1
 )
 # Relationship/

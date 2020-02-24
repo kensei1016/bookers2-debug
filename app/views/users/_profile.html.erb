@@ -15,7 +15,7 @@
 			<th>Follows</th>
 			<th>
 				<%= link_to follows_user_path(user) do %> 
-					<%= user.relationship_users.count %>
+					<%= user.follower.count %>
 				<% end %>
 			</th>
 		</tr>
@@ -24,7 +24,7 @@
 			<th>Followers</th>
 			<th>
 				<%= link_to followers_user_path(user) do %> 
-					<%= user.relationship_follow_users.count %>
+					<%= user.followed.count %>
 				<% end %>
 			</th>
 				
@@ -36,7 +36,7 @@
 	<div class="follow-buttun-block row">
 		<div class="col-xs-12">
 			<!-- 自分にのフォロワーにユーザが含まれているか -->
-			<% if current_user.relationship_users.any?{ |relationship_user| relationship_user.follow_user_id == user.id } %>
+			<% if current_user.following?(user) %>
 				<%= link_to 'フォロー外す', user_relationship_path(user), method: :delete, class: "btn btn-danger" %>
 			<% else %>
 				<%= link_to 'フォローする', user_relationship_path(user), method: :post, class: "btn btn-primary" %>
