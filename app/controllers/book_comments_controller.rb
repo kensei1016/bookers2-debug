@@ -5,7 +5,7 @@ class BookCommentsController < ApplicationController
     if @book_comment.save
       redirect_back fallback_location: root_path, notice: "コメントを投稿しました"
     else
-      @book_comments = BookComment.where(user_id: current_user.id)
+      @book_comments = BookComment.where(book_id: @book.id)
       render "books/show"
     end
   end
@@ -14,7 +14,8 @@ class BookCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     book_comment = BookComment.find(params[:id])
     if book_comment.destroy
-      redirect_back(fallback_location: root_path)
+      # redirect_back(fallback_location: root_path)
+      redirect_to book_path(@book)
     end
 
   end
