@@ -3,10 +3,11 @@ class BookCommentsController < ApplicationController
     @book = Book.find(params[:book_id])
     @book_comment = current_user.book_comments.build(set_book_comment_params)
     if @book_comment.save
+      flash[:success] = "Comment was successfully created."
       render 'book_comment_view'
     else
-      render 'book_comment_view'
       # エラーのときどうやってメッセージ出そう…
+      render 'book_comment_view'
     end
     
   end
