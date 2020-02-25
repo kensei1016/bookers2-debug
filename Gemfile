@@ -88,3 +88,5 @@ gem 'hirb-unicode'
 gem 'font-awesome-sass', '~> 5.4.1'
 
 gem 'ransack'
+
+gem 'jp_prefecture'
