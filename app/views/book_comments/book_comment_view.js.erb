@@ -1,0 +1,4 @@
+$("#book-comments-show-block")
+    .prepend('<%= j render partial: "book_comment", locals: {book_comment: @book_comment} %>');
+// 入力フォームをクリア
+$(".book-comment-post-input").val('');
