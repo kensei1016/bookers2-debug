@@ -88,3 +88,11 @@ gem 'hirb-unicode'
 gem 'font-awesome-sass', '~> 5.4.1'
 
 gem 'ransack'
+
+gem 'jp_prefecture'
+
+# Railsで使える環境変数を管理
+gem 'dotenv-rails'
+
+# google mapの緯度経度割り出すやつ？？
+gem 'geocoder'

@@ -1,4 +1,4 @@
-<div class="container">
+<div class="container" style="margin-bottom: 100px">
 	<p id="notice"><%= notice %></p>
 	<div class="row">
 		<div class="col-xs-3">
@@ -45,5 +45,37 @@
 			<!--books一覧 -->
 		</div>
 	</div>
+
+	<% if current_user == @user %>
+		<div class="row">
+			<div col-xs-12>
+				<h2>Your MAP</h2>
+				<div id='map'></div>
+			</div>
+		</div>
+	<% end %>
+
 </div>
 
+<script>
+	function initMap(){
+		let map = new google.maps.Map(document.getElementById('map'), {
+			center: {lat: -34.397, lng: 150.644},
+			zoom: 6
+		});
+
+		// 位置情報をもつ変数を用意
+		let pos = new google.maps.LatLng(
+			<%= @latlng[0] %>, //latitude
+			<%= @latlng[1] %>  //longitude
+		);
+
+		map.setCenter(pos)
+
+		let marker = new google.maps.Marker({
+			map: map,
+			position: pos
+		});
+	}
+</script>
+<script src="https://maps.googleapis.com/maps/api/js?key=<%= ENV['GOOGLE_API_KEY'] %>&callback=initMap" async defer></script>
