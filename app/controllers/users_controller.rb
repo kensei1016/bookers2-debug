@@ -4,7 +4,15 @@ class UsersController < ApplicationController
   def show
   	@user = User.find(params[:id])
   	@books = @user.books
-  	@book = Book.new #new bookの新規投稿で必要（保存処理はbookコントローラー側で実施）
+		@book = Book.new
+		
+		user_address = @user.prefecture.name + @user.address_city + @user.address_street
+		results = Geocoder.search(user_address)
+
+		# 検索に引っかからなかった場合はとりあえずアメリカ
+		results = Geocoder.search('アメリカ') if results.empty?
+
+		@latlng = results.first.coordinates
   end
 
 	def index
@@ -38,7 +46,7 @@ class UsersController < ApplicationController
 
   private
   def user_params
-  	params.require(:user).permit(:name, :introduction, :profile_image)
+  	params.require(:user).permit(:name, :introduction, :profile_image, :postal_code, :prefecture_code, :address_city, :address_street)
   end
 
   #url直接防止　メソッドを自己定義してbefore_actionで発動。
