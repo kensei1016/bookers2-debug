@@ -1,4 +1,6 @@
 $("#book-comments-show-block")
     .prepend('<%= j render partial: "book_comment", locals: {book_comment: @book_comment} %>');
+$("#post_book_tr_<%=@book.id%>")
+    .html('<%= j render partial: "books/post_book", locals: {book: @book} %>')
 // 入力フォームをクリア
 $(".book-comment-post-input").val('');
