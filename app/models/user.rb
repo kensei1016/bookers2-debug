@@ -28,6 +28,23 @@ class User < ApplicationRecord
   validates :name, length: {maximum: 20, minimum: 2}
   validates :introduction, length: {maximum: 50}
 
+  scope :name_is, -> (name) { where(name: name) }
+
+  def self.search(keyword, search_type)
+    case search_type
+    when '完全一致'
+      User.name_is(keyword)
+    when '前方一致'
+      User.where("name LIKE ?", "#{keyword}%")
+    when '後方一致'
+      User.where("name LIKE ?", "%#{keyword}")
+    when '部分一致'
+      User.where("name LIKE ?", "%#{keyword}%")
+    else 
+      User.all
+    end
+  end
+
   def follow(user_id)
     follower.create(followed_id: user_id)
   end
