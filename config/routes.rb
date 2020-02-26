@@ -11,6 +11,7 @@ Rails.application.routes.draw do
       get 'follows'
       get 'followers'
     end
+    resource :chat, only: [:show], to: 'chat#show'
   end
   resources :books do
     resource :favorite, only: [:create, :destroy]

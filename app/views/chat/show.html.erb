@@ -1,0 +1,14 @@
+<h1>トナカイさんとのチャット</h1>
+
+<!--<ul id="chat-index">
+  <li>Posts</li>
+</ul>-->
+
+<div id="chat-index">
+  <%= render partial: "chat", collection: @chats %>
+</div>
+
+<form>
+  <input id="chat-form", type="text", data-behavior="chat_post">
+  <!--<input type="submit", name="commit", value="送信", class="btn btn-default">-->
+</form>
