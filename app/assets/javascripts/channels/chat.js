@@ -1,26 +1,22 @@
-App.chat = App.cable.subscriptions.create("ChatChannel", {
-  connected: function() {
-    // Called when the subscription is ready for use on the server
-  },
+$(document).on('turbolinks:load', function() {
+  const app = App.cable.subscriptions.create({channel: 'ChatChannel', room_id: $('#room').data('room') }, {
+    connected: function(data) {
+    },
+    disconnected: function(data) {
+    },
+    received(data) {
+      if ($('#room').data('user') == data['current_user_id']) {
+        $('.message').append('<p style="text-align: right">' + data['data'] + '</p>');
+      } else {
+        $('.message').append('<p style="text-align: left">' + data['data'] + '</p>');
+      }
+    }
+  })
 
-  disconnected: function() {
-    // Called when the subscription has been terminated by the server
-  },
-
-  received: function(data) {
-    // Called when there's incoming data on the websocket for this channel
-    // $('#chat-index').append('<p>' + data['message'] + '</p>');
-    $('#chat-index').append(data['message']);
-    console.log(data['message'])
-  },
-
-  post: function(message) {
-    return this.perform('post', {message: message});
-  }
-}, $(document).on('keypress', '[data-behavior~=chat_post]', function(event) {
-  if (event.keyCode === 13) {
-    var chatForm = $('#chat-form');
-    App.chat.post(chatForm.val());
-    return chatForm.val('');
-  }
-}));
+  $(document).on('keypress', '.post', function(e) {
+    if (e.keyCode === 13) {
+      app.perform("create", {data: $('.post').val(), current_user_id: $('#room').data('user')});
+      $('.post').val('');
+    }
+  })
+});
