@@ -18,4 +18,6 @@ Rails.application.routes.draw do
   end
 
   get 'search', to: 'search#search', as: :search
+
+  get 'chat/:id' => 'chat#show', as: 'chat'
 end
