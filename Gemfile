@@ -96,3 +96,5 @@ gem 'dotenv-rails'
 
 # google mapの緯度経度割り出すやつ？？
 gem 'geocoder'
+
+gem 'whenever', require: false
